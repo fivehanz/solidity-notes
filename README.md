@@ -91,6 +91,7 @@ default values
         price = _price;
         return _price;
     }
+...
 
 ```
 
@@ -110,6 +111,7 @@ default values
         price = _price;
         owner = msg.sender;
     }
+...
 
 ```
 
