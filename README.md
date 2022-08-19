@@ -116,3 +116,127 @@ default values
 ```
 
 # boolean and int types
+
+- boolean: initialized as false by default
+- signed and unsigned int: (unsigned is always positive)
+  - int8 to int256, uint8 to uint256 in multiples of 8
+  - int8 -> -128 to +127
+  - int16 -> -32768 to +32767
+  - uint8 -> 0 - 255 (2^n - 1)
+  - uint16 -> 0 - 65535
+- simply writing int or uint is initialized with int256 / uint256
+
+```solidity
+...
+    bool public sold;
+
+    uint public price;
+    int public location;
+...
+
+```
+
+# arrays
+
+fixed-size arrays
+
+- fixed size at compile time
+- bytes1, bytes2, ..., bytes32
+- can hold any type
+- member: length
+
+```solidity
+...
+    // default value: 0x00
+    bytes1 public b1;
+    // default value: 0x0000
+    bytes2 public b2;
+    // default value: 0x000000
+    bytes3 public b3;
+    // ... upto 32 bytes
+
+
+    // initialized as [0, 0, 0]
+    uint[3] public three_zeros;
+    uint[3] public numbers = [2, 3, 4];
+...
+
+```
+
+dynamically-sized arrays
+
+- Bytes
+- String (utf8 encoded) is a dynamic array similar to bytes
+- can hold any type
+- member: length and push
+
+```solidity
+...
+    uint[] public numbers;
+...
+
+```
+
+# Bytes and String types
+
+- special dynamic array
+- String
+  - equal to bytes
+  - does not allow length or index access
+  - utf-8 encoded
+  - does not allow push method
+- Bytes and Strings are reference types, not value types
+
+```solidity
+...
+    // stores as 0x616263
+    bytes public b1 = 'abc';
+    // stores as abc
+    string public s1 = 'abc';
+...
+
+```
+
+# mappings
+
+- similar to hashmaps / dict
+- key -> value pairs
+- all keys must be of same type
+- all values must be of same type
+- keys cannot be of types mapping, dynamic array, enum or struct
+- values can be of any type
+- mappings can only have a data location of storage
+- provides constant time lookup
+- not iterable
+- search for unexisting key will return a default value
+
+```solidity
+...
+    mapping (address => uint) public bids;
+...
+
+```
+
+# structs and enums
+
+```solidity
+struct Planet {
+    uint age;
+    string name;
+    address addr;
+}
+
+...
+    Planet public universePlanet;
+
+    enum State {Inhabited, Uninhabited, Unknown}
+    State public universeState;
+...
+
+```
+
+# storage vs memory vs calldata
+
+- storage is the most expensive, but persisted to the blockchain
+- memory is cheapper than storage and offers read and writes, but its data is not persisted outside of the function it lives in (scoped).
+- calldata is cheaper than storage, but is immutable and read only
