@@ -79,3 +79,38 @@ default values
 - for structs the delete keyword will recurse into the members, unless they are mappings.
 
 # functions, setters & getters
+
+```solidity
+
+...
+    // stored in storage
+    uint256 public price = 100;
+
+    // _price is stored in memory
+    function setPrice (uint256 _price) public returns(uint) {
+        price = _price;
+        return _price;
+    }
+
+```
+
+# the constructor
+
+- special function that executes only once when the contract is deployed.
+- optional
+- when deploying a contract that has a constructor with parameters, these values must be supplied in order to successfully deploy
+
+```solidity
+
+...
+    // cannot be changed after initially set
+    address public immutable owner;
+
+    constructor (uint256) {
+        price = _price;
+        owner = msg.sender;
+    }
+
+```
+
+# boolean and int types
