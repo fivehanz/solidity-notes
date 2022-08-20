@@ -240,3 +240,44 @@ struct Planet {
 - storage is the most expensive, but persisted to the blockchain
 - memory is cheapper than storage and offers read and writes, but its data is not persisted outside of the function it lives in (scoped).
 - calldata is cheaper than storage, but is immutable and read only
+
+# built-in global variables
+
+**msg**
+
+- msg.sender: account address that generates the transaction
+- msg.value: eth value (in wei) sent with the function call
+- msg.gas: remaining gas, replaced by `gasleft()`
+- msg.data: data field from the transaction or call that executed the transaction
+
+**this**
+
+- the current contract, explicitly convertible to Address `address(this)`
+
+**block**
+
+- block.timestamp: unix epoch
+- block.number: current block number
+- block.difficulty: difficulty of mining a block
+- block.gaslimit: max gas limit all the transactions inside block allowed to consume.
+
+**tx**
+
+- tx.gasprice: gas price of the transaction
+- tx.origin: sender of the transaction (!= msg.sender)
+
+# modifiers
+
+- `pure` for functions: disallows modification or access of state
+- `view` for functions: disallows modification of state
+- `payable` '' : allows them to receive ether together with a call
+- `constant` for state vars:
+  - dissallows assignment
+  - does not occupy storage slot
+- `immutable` for state vars:
+  - allows exactly one assignment
+  - stored in code
+- `virtual` for function and modifiers: allows the function's or modifier's behaviour to be changed in derived contracts.
+- `override` states that this function, modifier or public state variable changes the behaviour of a function or modifier in a base contract.
+
+# contract address and balance: payable, receive, and fallback.
