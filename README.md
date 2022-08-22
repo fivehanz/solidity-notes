@@ -281,3 +281,23 @@ struct Planet {
 - `override` states that this function, modifier or public state variable changes the behaviour of a function or modifier in a base contract.
 
 # contract address and balance: payable, receive, and fallback.
+
+- [docs](https://docs.soliditylang.org/en/v0.8.16/types.html#address)
+- [member methods](https://docs.soliditylang.org/en/v0.8.16/units-and-global-variables.html#address-related)
+
+WIP
+
+# visibility
+
+- `public` :
+  - part of the contract interface
+  - can be called both internally and externally
+- `external` :
+  - part of the contract interface
+  - can only be accessed externally
+- `internal` : can be accessed by the contract they are defined and inherited contracts
+- `private` : only available within the contract, not available for inherited contracts
+
+# events and errors
+
+[docs](https://docs.soliditylang.org/en/v0.8.15/contracts.html#events)
